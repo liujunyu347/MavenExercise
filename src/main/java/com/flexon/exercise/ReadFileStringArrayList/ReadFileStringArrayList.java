@@ -2,6 +2,7 @@ package com.flexon.exercise.ReadFileStringArrayList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.io.IOException;
 import java.util.*;
 //1. Write a program to read a file from a location
@@ -10,9 +11,14 @@ import java.util.*;
 //4. Iterate the arraylist and print.
 
 public class ReadFileStringArrayList {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
         ReadFileStringArrayList RFSL = new ReadFileStringArrayList();
-        File inputFile = new File("myText.txt");
+        File classFile = new File(ReadFileStringArrayList.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+        String filePath = classFile.toURI().getPath();
+        String rootPath = filePath.substring(0, filePath.lastIndexOf("/"));
+        String inputPath = rootPath + "/myText.txt";
+        File inputFile = new File(inputPath);
+//        File inputFile = new File("myText.txt");
 //        FileReader FileReader = new FileReader(inputFile);
 //        BufferedReader bufferedReader = new BufferedReader(FileReader);
 //        String line = bufferedReader.readLine();
